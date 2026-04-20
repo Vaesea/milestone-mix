@@ -1,6 +1,9 @@
 # ForestTux
 The SuperTux himself goes to the forest world to stop Nolok once and for all! Nolok is using innocent forest creatures as power for his badguys and his castle, so you, yes you, must help Tux stop him! Tux must go to the Forest World and end this madness once and for all!
 
+## What was the point of renaming it to ForestTux?
+I wanted to make this more "weird" I guess, and it was gonna be less like Milestone 1. However, this isn't being worked on anymore, and all of the planned things for this will be moved to a new (old) project, "Vaesea's SuperTux", which will contain 2 worlds, Ice Land (not the country or the shop), and Tree Land.
+
 ## Credits
 - Vaesea (Coding, Levels that still need to be made)
 - AnatolyStev (Coding)
