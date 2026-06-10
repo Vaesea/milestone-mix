@@ -1,5 +1,7 @@
-# ForestTux
-The SuperTux himself goes to the forest world to stop Nolok once and for all! Nolok is using innocent forest creatures as power for his badguys and his castle, so you, yes you, must stop him! Go to the Forest World and end this madness once and for all!
+# SuperTux Milestone Mix
+Forest World in Milestone 1 using PepperTux code (Made using HaxeFlixel)
+
+This is just chapter 1 of a larger project.
 
 ## Credits
 - Vaesea (Coding, Levels that still need to be made)
