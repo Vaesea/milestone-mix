@@ -1,5 +1,5 @@
 # ForestTux
-The SuperTux himself goes to the forest world to stop Nolok once and for all! Nolok is using innocent forest creatures as power for his badguys and his castle, so you, yes you, must help Tux stop him! Tux must go to the Forest World and end this madness once and for all!
+The SuperTux himself goes to the forest world to stop Nolok once and for all! Nolok is using innocent forest creatures as power for his badguys and his castle, so you, yes you, must stop him! Go to the Forest World and end this madness once and for all!
 
 ## Credits
 - Vaesea (Coding, Levels that still need to be made)
