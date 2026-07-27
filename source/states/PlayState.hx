@@ -106,8 +106,6 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
-
 		updateCheckpoint();
 
 		// Tux collision
@@ -131,6 +129,8 @@ class PlayState extends FlxState
 
 		// Item collision
 		FlxG.collide(solidThings, items);
+
+		super.update(elapsed);
 	}
 
 	function collideEntities(entity:FlxSprite, tux:Tux)
