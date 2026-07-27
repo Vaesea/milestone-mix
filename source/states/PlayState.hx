@@ -1,5 +1,7 @@
 package states;
 
+import objects.BonusBlockArea;
+import flixel.FlxObject;
 import characters.enemies.Enemy;
 import characters.enemies.Nolok;
 import characters.player.Fireball;
@@ -35,8 +37,8 @@ class PlayState extends FlxState
 	public var tux(default, null):Tux;
 	public var items(default, null):FlxTypedGroup<FlxSprite>;
 	public var td(default, null):FlxTypedGroup<TuxDoll>;
-	public var blocks(default, null):FlxTypedGroup<FlxSprite>;
-	public var bricks(default, null):FlxTypedGroup<FlxSprite>;
+	public var blocks(default, null):FlxTypedGroup<FlxObject>;
+	public var bricks(default, null):FlxTypedGroup<FlxSprite>; // Unused
 	public var atiles(default, null):FlxTypedGroup<FlxSprite>;
 	public var atilesFront(default, null):FlxTypedGroup<FlxSprite>;
 	var hud:HUD;
@@ -58,7 +60,7 @@ class PlayState extends FlxState
 		tux = new Tux();
 		td = new FlxTypedGroup<TuxDoll>();
 		items = new FlxTypedGroup<FlxSprite>();
-		blocks = new FlxTypedGroup<FlxSprite>();
+		blocks = new FlxTypedGroup<FlxObject>();
 		bricks = new FlxTypedGroup<FlxSprite>();
 		hud = new HUD();
 		atiles = new FlxTypedGroup<FlxSprite>();
@@ -78,6 +80,7 @@ class PlayState extends FlxState
 		add(atiles);
 		add(map);
 		add(td);
+		add(blocks);
 		add(entities);
 		add(tux);
 		add(atilesFront);
@@ -112,6 +115,10 @@ class PlayState extends FlxState
 		FlxG.overlap(entities, tux, collideEntities);
 		FlxG.collide(solidThings, tux, collideEntities);
 		FlxG.overlap(td, tux, collideEntities);
+		FlxG.overlap(tux, blocks, function(tux:Tux, area:BonusBlockArea) // anatolystev's fix!
+		{
+			area.block.hit(tux);
+		});
 
 		// Enemy + Entity collision
 		FlxG.collide(solidThings, entities);

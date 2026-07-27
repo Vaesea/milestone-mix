@@ -1,5 +1,6 @@
 package objects;
 
+import flixel.FlxObject;
 import characters.player.Tux;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,6 +13,7 @@ class BonusBlock extends FlxSprite
 {
     public var content:String;
     public var isEmpty = false;
+    public var hitArea:FlxObject;
 
     var blockImage = FlxAtlasFrames.fromSparrow('assets/images/objects/bonus/bonusblock.png', 'assets/images/objects/bonus/bonusblock.xml');
 
@@ -25,6 +27,9 @@ class BonusBlock extends FlxSprite
         animation.addByPrefix('full', 'bonusblock full', 12, true); // I messed up and used default settings for the FNF Spritesheet and XML generator.
         animation.addByPrefix('empty', 'bonusblock empty', 12, false);
         animation.play("full");
+
+        hitArea = new BonusBlockArea(this);
+        Global.PS.blocks.add(hitArea);
     }
 
     public function hit(tux:Tux)
@@ -34,10 +39,9 @@ class BonusBlock extends FlxSprite
             return;
         }
 
-        if (tux.isTouching(UP) || tux.wasTouching == UP) // No more TODO :) also wasTouching is just there for safety reasons. Also did you really think there was no more TODO? TODO: wait until haxeflixel people update collisions in a way that makes this actually work!!!!
+        if (tux.isTouching(UP) || tux.wasTouching == UP) 
         {
             isEmpty = true;
-            setSize(32, 31); // TODO: Remove this when Bonus Blocks can finally work properly in HaxeFlixel.
             createItem();
             FlxTween.tween(this, {y: y - 4}, 0.05) .wait(0.05) .then(FlxTween.tween(this, {y: y}, 0.05, {onComplete: empty}));
         }
