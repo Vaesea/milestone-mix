@@ -1,5 +1,6 @@
 package states;
 
+import collision.Collision;
 import objects.BonusBlockArea;
 import flixel.FlxObject;
 import characters.enemies.Enemy;
@@ -29,7 +30,7 @@ import states.substates.LevelIntro;
 class PlayState extends FlxState
 {
 	public var map:FlxTilemap;
-	public var uhoh = 49; // because i added a fucking nolok tile in the creatures tileset, the global id shifted to 49.
+	public var uhoh = 49; // because i added a nolok tile in the creatures tileset, the global id shifted to 49.
 
 	// Add things part 1
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
@@ -111,9 +112,21 @@ class PlayState extends FlxState
 	{
 		updateCheckpoint();
 
+		// Solid things
+		Collision.resolve(tux, solidThings, function(_, solid:FlxObject)
+		{
+			if (Std.isOfType(solid, FlxSprite))
+			{
+				collideEntities(cast solid, tux);
+			}
+		});
+
+		Collision.resolveGroup(enemies, solidThings);
+		Collision.resolveGroup(bosses, solidThings);
+		Collision.resolveGroup(items, solidThings);
+
 		// Tux collision
 		FlxG.overlap(entities, tux, collideEntities);
-		FlxG.collide(solidThings, tux, collideEntities);
 		FlxG.overlap(td, tux, collideEntities);
 		FlxG.overlap(tux, blocks, function(tux:Tux, area:BonusBlockArea) // anatolystev's fix!
 		{
@@ -121,7 +134,6 @@ class PlayState extends FlxState
 		});
 
 		// Enemy + Entity collision
-		FlxG.collide(solidThings, entities);
 		FlxG.overlap(entities, enemies, function (entity:FlxSprite, enemy:Enemy)
 		{
 			if (Std.isOfType(entity, Enemy))
@@ -133,9 +145,6 @@ class PlayState extends FlxState
 				enemy.collideFireball(cast entity);
 			}
 		} );
-
-		// Item collision
-		FlxG.collide(solidThings, items);
 
 		super.update(elapsed);
 	}
